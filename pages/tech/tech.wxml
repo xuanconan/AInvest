@@ -1,0 +1,5 @@
+<!--pages/tech/tech.wxml-->
+<view>
+  <text>Welcome to tech</text>
+</view>
+

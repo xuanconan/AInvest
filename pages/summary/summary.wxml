@@ -1,0 +1,85 @@
+<!--pages/summary/summary.wxml-->
+
+<view>
+  <view style="width:98%">
+    <view class="wa-grid">
+      <view class="wa-grid-20 border-basic">{{stock.symbol}}</view>
+      
+      <view class="wa-grid-20 border-basic">{{stock.score}}/100</view>
+      <view class="wa-grid-20 border-basic">{{stock.percentage}}%</view>
+      <view class="wa-grid-20 border-basic">{{stock.price}}</view>
+      <view class="wa-grid-20 border-basic">
+         <button class="wa-button wa-button-sm">+</button> 
+      </view>
+
+      <view class="wa-grid-20-bottom border-basic">{{stock.industry}}</view>
+      
+      <view class="wa-grid-20-bottom border-basic ">AI评分</view>
+      <view class="wa-grid-20-bottom border-basic">最新涨跌</view>
+      <view class="wa-grid-20-bottom border-basic">最新价</view>
+      <view class="wa-grid-20-bottom border-basic">加入自选</view>
+    </view>
+    
+  </view>
+
+</view>
+
+<view class="divLine"></view>
+
+<view>
+  <view class="wa-grid-2">
+    <text>今日总评 {{stock.score}}/100</text>
+  </view>
+
+  <view class="wa-grid-3">
+    <text>击败同行业{{stock.percentile}}的股票</text>
+  </view>
+  <view class="wa-grid-3">
+    <text>{{stock.recommend}}: {{stock.summary}}</text>
+  </view>
+</view>
+
+<view class="divLine"></view>
+
+
+
+<view>
+  <view class="wa-row">
+    <div style="font-size: 28rpx" class="wa-col-25 border-basic">技术面</div>
+    <view style="font-size: 26rpx"class="wa-col-75 border-basic">{{stock.tech}}</view>
+  </view>
+  <view class="divLine2"></view>
+  <view class="wa-row">
+    <view style="font-size: 28rpx" class="wa-col-25 border-basic">基础面</view>
+    <view style="font-size: 26rpx" class="wa-col-75 border-basic">{{stock.fundamental}}</view>
+  </view>
+  <view class="divLine2"></view>
+  <view class="wa-row">
+    <view style="font-size: 28rpx" class="wa-col-25 border-basic">资金面</view>
+    <view style="font-size: 26rpx" class="wa-col-75 border-basic">{{stock.finance}}</view>
+  </view>
+</view>
+
+
+
+<view class="container">
+    <canvas canvas-id="radarCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
+</view>
+
+  <view class="wa-grid-4">
+    <text>同行业高分股票</text>
+  </view>
+
+  <view class="wa-row">
+    <view style="font-size: 28rpx" class="wa-col-40-b border-basic">股票代码</view>
+    <view style="font-size: 28rpx" class="wa-col-60-b border-basic">AI评分</view>
+  </view>
+  <view class="divLine"></view>
+
+  <view wx:for="{{array}}" wx:for-index="idx" wx:for-item="itemName">
+    <view class="wa-row">
+      <view style="font-size: 28rpx" class="wa-col-40-c border-basic">　{{itemName.symbol}}</view>
+      <view style="font-size: 28rpx" class="wa-col-60-c border-basic">{{itemName.score}}/100</view>
+    </view>
+  </view>
+

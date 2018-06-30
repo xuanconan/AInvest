@@ -1,0 +1,75 @@
+<!--index.wxml-->
+<view class="container">
+
+  <view class = "image-padding">
+    <image style="width:320px; " src="/images/Ainvest.png" mode="widthFix"></image>
+  </view>
+
+  <view style="font-size: 60rpx" class = "titlefont">
+      <text>拥抱AI　　遇见未来</text>
+  </view>
+
+
+<!-- 
+  <view class="section">
+    <view class="section__title">{{inputValue}}</view>
+    <input  bindinput="bindKeyInput" placeholder="搜索"/>
+  </view> -->
+
+  <view class="search flex-wrp" >
+      <view class="search-left flex-item" bindtap="onStockSearchEvent">
+          <image src="/images/搜索灰.png"></image>
+          <input placeholder="输入股票名称或代码" placeholder-class="search-placeholder" />
+      </view>
+       <view class="search-right flex-item" bindtap="upper">
+          <image src="/images/lighting.png"></image>
+      </view> 
+  </view>
+ 
+  <view style="width:100%;">
+    <view class="wa-grid text-center">
+      <view class="wa-grid-50 border-basic">今日热搜</view>
+      <view class="wa-grid-50 border-basic">累计搜索</view>
+      <view class="wa-grid-50 border-basic">{{hottoday}}</view>
+      <view class="wa-grid-50 border-basic">{{totalcount}}</view>
+    </view>
+  </view>
+
+  
+    <view class="swiper-tab">  
+        <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">A股明星</view>  
+        <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">美股明星</view>  
+    </view> 
+
+    <swiper current="{{currentTab}}" class="swiper" duration="300" style="height:{{winHeight-100}}px" bindchange="bindChange">  
+        <!-- A股 -->  
+        <swiper-item>  
+          <view wx:for="{{array1}}" wx:for-index="idx" wx:for-item="itemName">
+            <view class="wa-row">
+              <view style="font-size: 30rpx" class="wa-col-65 border-basic">No.{{idx+1}} {{itemName.stockname}}</view>
+              <view style="font-size: 30rpx" class="wa-col-35 border-basic">{{itemName.score}} 　>{{itemName.percentage}}%</view>
+            </view>
+          </view>
+          <view>
+            今日市场综合评价: {{marketsummaryA}}
+          </view>
+        </swiper-item>  
+        <!-- 美股 -->  
+        <swiper-item>  
+          <view wx:for="{{array2}}" wx:for-index="idx" wx:for-item="itemName">
+            <view class="wa-row">
+              <view style="font-size: 30rpx" class="wa-col-65 border-basic">No.{{idx+1}} {{itemName.stockname}}</view>
+              <view style="font-size: 30rpx" class="wa-col-35 border-basic">{{itemName.score}} 　>{{itemName.percentage}}%</view>
+            </view>
+          </view>
+          <view style = "font-weight: 1000">
+            今日市场综合评价: {{marketsummaryM}}
+          </view>   
+        </swiper-item>  
+    </swiper> 
+  
+
+
+
+
+</view>

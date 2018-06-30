@@ -1,0 +1,21 @@
+<import src="../common/SearchBar/SearchBar.wxml" />
+
+<!-- <view class ="container">
+  <view class="search flex-wrp">
+
+      <view class="search-left flex-item" >
+
+          <image src="/images/搜索灰.png"></image>
+          <input  placeholder="输入股票名称或代码" placeholder-class="search-placeholder"/>
+      </view>
+        <view class="search-right flex-item" form-type="reset">
+          <image src="/images/lighting.png"></image>
+      </view>  
+
+  </view>
+</view> -->
+
+
+<view class="search_view B1" style="background: #FCFAFA">
+  <template is="SearchBar" data="{{searchData}}" />
+</view>

@@ -1,0 +1,58 @@
+<!--pages/watchlist/watchlist.wxml-->
+
+<view class="wa-grid-2">
+  <text>我的自选</text>
+</view>
+
+<!--搜索按钮-->
+<view class="icon_search" bindtap="onStockSearchEvent">
+    <icon type="search" size="20"/>
+    <text style="color: #dddddd; font-size: 26rpx;">搜索</text>
+</view>
+
+<view class="divLine"></view>
+
+<view>
+  <view style="width:98%">
+    <view class="wa-grid">
+      <view class="wa-grid-16 border-basic">代码</view>
+      <view class="wa-grid-16 border-basic">涨跌</view>
+      <view class="wa-grid-16 border-basic">最新价</view>
+      <view class="wa-grid-16 border-basic ">AI评分</view>
+      <view class="wa-grid-16 border-basic ">排名</view>
+      <view class="wa-grid-16 border-basic ">推荐操作</view>
+    </view>
+  </view>
+</view>
+
+  <view  wx:for="{{stocks}}" wx:for-index="idx" wx:for-item="itemName">
+    <view class="wa-row">
+
+      <view class="wa-grid-16b border-basic">{{itemName.symbol}}</view>
+      <view class="wa-grid-16b border-basic">
+        <view wx:if="{{itemName.percentage < 0}}">
+          <view style = "color:#008000">{{itemName.percentage}}%</view>
+        </view>
+        <view wx:elif="{{itemName.percentage > 0}}"> 
+          <view style = "color:#FF0000">{{itemName.percentage}}%</view>
+        </view>
+      </view>
+      <view class="wa-grid-16b border-basic">
+        <view wx:if="{{itemName.percentage < 0}}">
+          <view style = "color:#008000">{{itemName.price}}</view>
+        </view>
+        <view wx:elif="{{itemName.percentage > 0}}"> 
+          <view style = "color:#FF0000">{{itemName.price}}</view>
+        </view>
+      
+      </view>
+
+
+
+      <view class="wa-grid-16b border-basic ">{{itemName.score}}/100</view>
+      <view class="wa-grid-16b border-basic ">{{itemName.percentile}}</view>
+      <view class="wa-grid-16b border-basic ">{{itemName.recommend}}</view>
+    </view>
+  </view>
+
+

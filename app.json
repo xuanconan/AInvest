@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/main/main",
+    "pages/search/search",
+    "pages/summary/summary",
+    "pages/tech/tech",
+    "pages/watchlist/watchlist"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#B02222",
+    "navigationBarTitleText": "AINVEST",
+    "navigationBarTitleTextSize": 12,
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/main/main",
+        "text": "市场",
+        "iconPath": "images/股票灰.png",
+        "selectedIconPath": "images/股票红.png"
+      },
+
+      {
+        "pagePath": "pages/summary/summary",
+        "text": "总评",
+        "iconPath": "images/雷达图灰.png",
+        "selectedIconPath": "images/雷达图红.png"
+      },
+      {
+        "pagePath": "pages/tech/tech",
+        "text": "技术",
+        "iconPath": "images/K线图灰.png",
+        "selectedIconPath": "images/K线图红.png"
+      },
+      {
+        "pagePath": "pages/watchlist/watchlist",
+        "text": "自选",
+        "iconPath": "images/收藏夹灰.png",
+        "selectedIconPath": "images/收藏夹红.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
+}
