@@ -62,24 +62,136 @@
 
 
 
-<view class="container">
+<!-- <view class="container">
     <canvas canvas-id="radarCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
-</view>
+</view> -->
+
+<view class="padding"></view>
+
+  <view class="line-container">
+      <canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler"></canvas>
+  </view>
 
   <view class="wa-grid-4">
-    <text>同行业高分股票</text>
+    <text>交易推荐历史</text>
   </view>
 
   <view class="wa-row">
-    <view style="font-size: 28rpx" class="wa-col-40-b border-basic">股票代码</view>
-    <view style="font-size: 28rpx" class="wa-col-60-b border-basic">AI评分</view>
+    <view style="font-size: 24rpx" class="wa-col-25 border-basic">　买/卖</view>
+    <view style="font-size: 24rpx" class="wa-col-25 border-basic">日期</view>
+    <view style="font-size: 24rpx" class="wa-col-25 border-basic">当日评分</view>
+    <view style="font-size: 24rpx" class="wa-col-25 border-basic">价格</view>
   </view>
   <view class="divLine"></view>
 
-  <view wx:for="{{array}}" wx:for-index="idx" wx:for-item="itemName">
+  <view wx:for="{{buysell}}" wx:for-index="idx" wx:for-item="itemName">
     <view class="wa-row">
-      <view style="font-size: 28rpx" class="wa-col-40-c border-basic">　{{itemName.symbol}}</view>
-      <view style="font-size: 28rpx" class="wa-col-60-c border-basic">{{itemName.score}}/100</view>
+      <view style="font-size: 24rpx" class="wa-col-25 border-basic">　{{itemName.sellorbuy}}</view>
+      <view style="font-size: 24rpx" class="wa-col-25 border-basic">{{itemName.date}}</view>
+      <view style="font-size: 24rpx" class="wa-col-25 border-basic">{{itemName.score}}</view>
+      <view style="font-size: 24rpx" class="wa-col-25 border-basic">{{itemName.price}}</view>
+
     </view>
   </view>
 
+<view class="divLine"></view>
+
+
+<view>
+  <view class="wa-grid-5">
+    <text>基本面分析</text>
+  </view>
+
+  <view class="wa-grid-7">
+    <text>基本面AI评分 {{basic.score}}/100</text>
+  </view>
+
+  <view class="wa-grid-3">
+    <text>{{basic.summary1}}</text>
+  </view>
+  <view class="wa-grid-3">
+    <text>{{basic.summary2}}</text>
+  </view>
+    <view class="wa-grid-3">
+    <text>{{basic.summary3}}</text>
+  </view>
+</view>
+
+<view class="divLine"></view>
+
+<view class="wa-grid-6">
+  <text>净利润</text>
+</view>
+
+  <canvas canvas-id="profit" class="canvas" bindtouchstart="touchHandler"></canvas>
+
+<view class="divLine"></view>
+
+  <view class="wa-grid-6">
+    <text>股本回报率</text>
+  </view>
+
+  <canvas canvas-id="roe" class="canvas" bindtouchstart="touchHandler"></canvas>
+
+<view class="divLine"></view>
+
+
+
+
+<view>
+  <view class="wa-grid-5">
+    <text>资金面分析</text>
+  </view>
+
+  <view class="wa-grid-7">
+    <text>资金面AI评分 {{finance.score}}/100</text>
+  </view>
+
+  <view class="wa-grid-3">
+    <text>{{finance.summary1}}</text>
+  </view>
+  <view class="wa-grid-3">
+    <text>{{finance.summary2}}</text>
+  </view>
+  <!-- <view class="wa-grid-3">
+    <text>{{finance.summary3}}</text>
+  </view> -->
+</view>
+
+<view class="divLine"></view>
+
+<view class="container2">
+    <canvas canvas-id="longshort" class="canvas" style="height:300px" bindtouchstart="touchHandler"></canvas>
+</view>
+
+<view class="divLine"></view>
+
+
+<view>
+  <view class="wa-grid-5">
+    <text>技术面分析</text>
+  </view>
+
+  <view class="wa-grid-7">
+    <text>技术面AI评分 {{tech.score}}/100</text>
+  </view>
+
+  <view class="wa-grid-3">
+    <text>{{tech.summary1}}</text>
+  </view>
+  <view class="wa-grid-3">
+    <text>{{tech.summary2}}</text>
+  </view>
+   <view class="wa-grid-3">
+    <text>{{tech.summary3}}</text>
+  </view> 
+</view>
+
+<view class="divLine"></view>
+
+
+<!--搜索按钮-->
+<view class="icon_search" bindtap="onStockSearchEvent">
+    <icon type="search" size="20"/>
+    <text style="color: #dddddd; font-size: 26rpx;">搜索</text>
+</view>

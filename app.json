@@ -25,16 +25,11 @@
 
       {
         "pagePath": "pages/summary/summary",
-        "text": "总评",
-        "iconPath": "images/雷达图灰.png",
-        "selectedIconPath": "images/雷达图红.png"
-      },
-      {
-        "pagePath": "pages/tech/tech",
-        "text": "技术",
+        "text": "AI诊股",
         "iconPath": "images/K线图灰.png",
         "selectedIconPath": "images/K线图红.png"
       },
+
       {
         "pagePath": "pages/watchlist/watchlist",
         "text": "自选",

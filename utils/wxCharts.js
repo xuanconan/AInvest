@@ -20,7 +20,7 @@ var config = {
   columePadding: 3,
   fontSize: 10,
   dataPointShape: ['diamond', 'circle', 'triangle', 'rect'],
-  colors: ['#7cb5ec', '#f7a35c', '#434348', '#90ed7d', '#f15c80', '#8085e9'],
+  colors: ['#FF4242', '#79A93F', '#FFCC5E', '#E2F557', '#f15c80', '#8085e9'],
   pieChartLinePadding: 25,
   pieChartTextPadding: 15,
   xAxisTextPadding: 3,
@@ -729,18 +729,18 @@ function drawPointShape(points, color, shape, context) {
   if (shape === 'diamond') {
     points.forEach(function (item, index) {
       if (item !== null) {
-        context.moveTo(item.x, item.y - 4.5);
-        context.lineTo(item.x - 4.5, item.y);
-        context.lineTo(item.x, item.y + 4.5);
-        context.lineTo(item.x + 4.5, item.y);
-        context.lineTo(item.x, item.y - 4.5);
+        context.moveTo(item.x, item.y - 2);
+        context.lineTo(item.x - 2, item.y);
+        context.lineTo(item.x, item.y + 2);
+        context.lineTo(item.x + 2, item.y);
+        context.lineTo(item.x, item.y - 2);
       }
     });
   } else if (shape === 'circle') {
     points.forEach(function (item, index) {
       if (item !== null) {
-        context.moveTo(item.x + 3.5, item.y);
-        context.arc(item.x, item.y, 4, 0, 2 * Math.PI, false);
+        context.moveTo(item.x + 2.5, item.y);
+        context.arc(item.x, item.y, 2, 0, 2 * Math.PI, false);
       }
     });
   } else if (shape === 'rect') {
