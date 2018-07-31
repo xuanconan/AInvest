@@ -1,4 +1,4 @@
-/* pages/summary/summary.wxss */
+barbar/* pages/summary/summary.wxss */
 .wa-grid{
   width:100%;
   overflow: hidden;

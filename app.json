@@ -4,7 +4,8 @@
     "pages/search/search",
     "pages/summary/summary",
     "pages/tech/tech",
-    "pages/watchlist/watchlist"
+    "pages/watchlist/watchlist",
+    "pages/index/index"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -35,6 +36,12 @@
         "text": "自选",
         "iconPath": "images/收藏夹灰.png",
         "selectedIconPath": "images/收藏夹红.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "我的",
+        "iconPath": "images/我的灰.png",
+        "selectedIconPath": "images/我的红.png"
       }
     ]
   },

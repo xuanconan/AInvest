@@ -69,7 +69,7 @@
 <view class="padding"></view>
 
   <view class="line-container">
-      <canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler"></canvas>
+      <canvas canvas-id="prices" disable-scroll="true" class="canvas" bindtouchstart="touchHandler"></canvas>
   </view>
 
   <view class="wa-grid-4">
@@ -160,6 +160,9 @@
 
 <view class="divLine"></view>
 
+<canvas canvas-id="dadan" class="canvas" bindtouchstart="touchHandler"></canvas>
+
+
 <view class="container2">
     <canvas canvas-id="longshort" class="canvas" style="height:300px" bindtouchstart="touchHandler"></canvas>
 </view>
@@ -188,9 +191,17 @@
 </view>
 
 <view class="divLine"></view>
+  <!-- <view class="wa-grid-5">
+    <text>{{stock.symbol}}</text>
+  </view> -->
+
+  <view class="line-container">
+      <canvas canvas-id="costs" disable-scroll="true" class="canvas" bindtouchstart="touchHandler"></canvas>
+  </view>
 
 
 <!--搜索按钮-->
+
 <view class="icon_search" bindtap="onStockSearchEvent">
     <icon type="search" size="20"/>
     <text style="color: #dddddd; font-size: 26rpx;">搜索</text>
