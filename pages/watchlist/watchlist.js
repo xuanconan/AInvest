@@ -8,6 +8,7 @@ Page({
     stocks:[
       {
         symbol: 'AAPL',
+        tickerId:'gb_aapl',
         score: '60',
         percentage: 1.8,
         price: 190.24,
@@ -16,6 +17,7 @@ Page({
       },
       {
         symbol: 'BIDU',
+        tickerId: 'gb_bidu',
         score: '53',
         percentage: 0.86,
         price: 272.97,
@@ -24,6 +26,7 @@ Page({
       },
       {
         symbol: 'NVDA',
+        tickerId: 'gb_nvda',
         score: '47',
         percentage: -0.62,
         price: 265.26,
@@ -32,6 +35,7 @@ Page({
       },
       {
         symbol: 'AMD',
+        tickerId: 'gb_amd',
         score: '41',
         percentage: 0.55,
         price: 16.34,
@@ -40,6 +44,7 @@ Page({
       },
       {
         symbol: 'GOOGL',
+        tickerId: 'gb_googl',
         score: '43',
         percentage: -0.07,
         price: 1159.27,
@@ -48,6 +53,7 @@ Page({
       },
       {
         symbol: 'SQ',
+        tickerId: 'gb_sq',
         score: '63',
         percentage: 0.92,
         price: 64.48,
@@ -56,6 +62,7 @@ Page({
       },
       {
         symbol: 'TAL',
+        tickerId: 'gb_tal',
         score: '67',
         percentage: -4.32,
         price: 38.74,
@@ -64,6 +71,7 @@ Page({
       },
       {
         symbol: 'AMZN',
+        tickerId: 'gb_amzn',
         score: '47',
         percentage: -0.46,
         price: 1715.97,
@@ -72,6 +80,7 @@ Page({
       },
       {
         symbol: 'LC',
+        tickerId: 'gb_lc',
         score: '89',
         percentage: 2.36,
         price: 3.91,
@@ -80,11 +89,21 @@ Page({
       },
       {
         symbol: 'NFLX',
+        tickerId: 'gb_nflx',
         score: '38',
         percentage: -0.23,
         price: 391.98,
         recommend: '卖出',
         percentile: '2%',
+      },
+      {
+        symbol: '亚夏汽车',
+        tickerId: 'sz002607',
+        score: '89',
+        percentage: -0.62,
+        price: 8.15,
+        recommend: '买入',
+        percentile: '99%',
       }
     ]
   

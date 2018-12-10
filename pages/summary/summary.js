@@ -1,11 +1,15 @@
 // pages/summary/summary.js
+
 var wxCharts = require('../../utils/wxCharts.js');
 var app = getApp();
 var radarChart = null;
-var lineChart = null;
+var lineChart1 = null;
+var lineChart2 = null;
 var columnChart = null;
 var pieChart = null;
-
+// var theName = '累计大单净量(万手)';
+var sinaDomain = app.globalData.sinaDomain;
+var appDomain = app.globalData.appDomain
 
 Page({
 
@@ -65,30 +69,37 @@ Page({
       // summary3: '存货是行业均值的56%，存货较少，产品销售较好',
     },
 
+    currentStock: {},
+
     buysell:[
       {
-        sellorbuy:'买',
+        sellorbuy:'做多',
         date:'2018/04/25',
         score:'80',
-        price: '163'
+        price: '163',
+        r5:'5%'
       },
       {
-        sellorbuy: '卖',
+        sellorbuy: '做空',
         date: '2018/05/10',
         score:'33',
-        price: '190'
+        price: '190',
+        r5:'3%'
       },
       {
-        sellorbuy: '买',
+        sellorbuy: '做多',
         date: '2018/06/25',
         score: '70',
-        price: '182'
+        price: '182',
+        r5:'4.7%'
+
       },
       {
-        sellorbuy: '卖',
+        sellorbuy: '做空',
         date: '2018/07/12',
         score: '49',
-        price: '191'
+        price: '191',
+        r5:'3.7%'
       }
 
     ]
@@ -111,10 +122,20 @@ Page({
     })
   },
 
-  touchHandler: function (e) {
+  touchHandler1: function (e) {
     // console.log(radarChart.getCurrentDataIndex(e));
-    console.log(lineChart.getCurrentDataIndex(e));
-    lineChart.showToolTip(e, {
+    console.log(lineChart1.getCurrentDataIndex(e));
+    lineChart1.showToolTip(e, {
+      // background: '#7cb5ec',
+      format: function (item, category) {
+        return category + ' ' + item.name + ':' + item.data
+      }
+    });
+  },
+  touchHandler2: function (e) {
+    // console.log(radarChart.getCurrentDataIndex(e));
+    console.log(lineChart2.getCurrentDataIndex(e));
+    lineChart2.showToolTip(e, {
       // background: '#7cb5ec',
       format: function (item, category) {
         return category + ' ' + item.name + ':' + item.data
@@ -122,35 +143,41 @@ Page({
     });
   },
 
-  createSimulationData: function () {
-    var categories = [];
-    var data = [];
-    for (var i = 0; i < 60; i++) {
-      categories.push('2018-' + (i + 1));
-      data.push(Math.random() * (20 - 10) + 10);
-    }
-    // data[4] = null;
-    return {
-      categories: categories,
-      data: data
-    }
-  },
-  updateData: function () {
-    var simulationData = this.createSimulationData();
-    var series = [{
-      name: '股价',
-      data: simulationData.data,
-      format: function (val, name) {
-        return val.toFixed(2) + '元';
-      }
-    }];
-    lineChart.updateData({
-      categories: simulationData.categories,
-      series: series
-    });
-  },
+  // createSimulationData: function () {
+  //   var categories = [];
+  //   var data = [];
+  //   for (var i = 0; i < 60; i++) {
+  //     categories.push('2018-' + (i + 1));
+  //     data.push(Math.random() * (20 - 10) + 10);
+  //   }
+  //   // data[4] = null;
+  //   return {
+  //     categories: categories,
+  //     data: data
+  //   }
+  // },
+  // updateData: function () {
+  //   var simulationData = this.createSimulationData();
+  //   var series = [{
+  //     name: '股价',
+  //     data: simulationData.data,
+  //     format: function (val, name) {
+  //       return val.toFixed(2) + '元';
+  //     }
+  //   }];
+  //   lineChart1.updateData({
+  //     categories: simulationData.categories,
+  //     series: series
+  //   });
+  // },
 
   onLoad: function (e) {
+    var that = this;
+
+    wx.showLoading({ title: '拼命加载中...' })
+    console.log(sinaDomain + e.id)
+
+    
     var windowWidth = 320;
     try {
       var res = wx.getSystemInfoSync();
@@ -159,8 +186,22 @@ Page({
       console.error('getSystemInfoSync failed!');
     }
 
-    var simulationData = this.createSimulationData();
-    lineChart = new wxCharts({
+    //获取新浪股票信息 上海
+    wx.request({
+      url: 'http://47.94.195.63/mf1volume/mf?ticker=SH600019',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          currentStock: res.data
+        })
+      }
+    });
+
+    // var simulationData = this.createSimulationData();
+    lineChart1 = new wxCharts({
       canvasId: 'prices',
       type: 'line',
       categories: ['2018/04/16', '2018/04/17', '2018/04/18', '2018/04/19', '2018/04/20', '2018/04/23', '2018/04/25', '2018/04/26', '2018/04/27', '2018/04/30', '2018/05/01', '2018/05/02', '2018/05/03', '2018/05/07', '2018/05/08', '2018/05/09', '2018/05/10', '2018/05/11', '2018/05/14', '2018/05/15', '2018/05/16', '2018/05/17', '2018/05/18', '2018/05/21', '2018/05/22', '2018/05/23', '2018/05/24', '2018/05/25', '2018/05/29', '2018/05/30', '2018/05/31', '2018/06/01', '2018/06/04', '2018/06/05', '2018/06/06', '2018/06/07', '2018/06/08', '2018/06/11', '2018/06/12', '2018/06/13', '2018/06/14', '2018/06/15', '2018/06/18', '2018/06/19', '2018/06/20', '2018/06/21', '2018/06/22', '2018/06/25', '2018/07/03', '2018/07/05', '2018/07/06', '2018/07/09', '2018/07/10', '2018/07/11', '2018/07/12', '2018/07/13', '2018/07/16', '2018/07/17', '2018/07/18', '2018/07/19'],
@@ -204,6 +245,8 @@ Page({
     try {
       var res = wx.getSystemInfoSync();
       windowWidth = res.windowWidth;
+      wx.hideLoading();
+
     } catch (e) {
       console.error('getSystemInfoSync failed!');
     }
@@ -272,9 +315,18 @@ Page({
       type: 'column',
       animation: true,
       categories: ['2018-03','2018-04', '2018-05', '2018-06', '2018-07'],
+      theName: '累计大单净量(万手)',
+      test:1,
+
+      // if(test = 1 ){
+      //   this.setData({theName:'累计大单净量(万手)'}),
+      // } else {
+      //   this.setData({ theName: '累计资金净流入(万美元)' }),
+      // },
+
       series: [{
         name: '累计大单净量(万手)',
-        data: [18, 15, 20, 45, 37],
+        data: [18, -15, 20, 45, 37],
         format: function (val, name) {
           return val.toFixed(2);
         }
@@ -304,16 +356,16 @@ Page({
       canvasId: 'longshort',
       type: 'pie',
       series: [{
-        name: '主力买入',
+        name: '超大单',
         data: 88,
       }, {
-        name: '主力卖出',
+        name: '超小单',
         data: 60,
       }, {
-        name: '散户买入',
+        name: '中单',
         data: 38,
       }, {
-        name: '散户卖出',
+        name: '小单',
         data: 20,
       }],
       width: windowWidth,
@@ -322,7 +374,7 @@ Page({
     });
 
 
-    lineChart = new wxCharts({
+    lineChart2 = new wxCharts({
       canvasId: 'costs',
       type: 'line',
       categories: ['2018/04/16', '2018/04/17', '2018/04/18', '2018/04/19', '2018/04/20', '2018/04/23', '2018/04/25', '2018/04/26', '2018/04/27', '2018/04/30', '2018/05/01', '2018/05/02', '2018/05/03', '2018/05/07', '2018/05/08', '2018/05/09', '2018/05/10', '2018/05/11', '2018/05/14', '2018/05/15', '2018/05/16', '2018/05/17', '2018/05/18', '2018/05/21', '2018/05/22', '2018/05/23', '2018/05/24', '2018/05/25', '2018/05/29', '2018/05/30', '2018/05/31', '2018/06/01', '2018/06/04', '2018/06/05', '2018/06/06', '2018/06/07', '2018/06/08', '2018/06/11', '2018/06/12', '2018/06/13', '2018/06/14', '2018/06/15', '2018/06/18', '2018/06/19', '2018/06/20', '2018/06/21', '2018/06/22', '2018/06/25', '2018/07/03', '2018/07/05', '2018/07/06', '2018/07/09', '2018/07/10', '2018/07/11', '2018/07/12', '2018/07/13', '2018/07/16', '2018/07/17', '2018/07/18', '2018/07/19'],

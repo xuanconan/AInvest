@@ -26,12 +26,12 @@
       </view> 
   </view>
  
-  <view style="width:100%;">
+  <view style="width:100%;" class = "line-padding">
     <view class="wa-grid text-center">
-      <view class="wa-grid-50 border-basic">今日热搜</view>
-      <view class="wa-grid-50 border-basic">累计搜索</view>
-      <view class="wa-grid-50 border-basic">{{hottoday}}</view>
-      <view class="wa-grid-50 border-basic">{{totalcount}}</view>
+      <view class="wa-grid-50 border-basic">今日热搜:  {{dailySummary.hottoday}}</view>
+      <view class="wa-grid-50 border-basic">累计搜索:  {{dailySummary.totalcount}}</view>
+      <!-- <view class="wa-grid-50 border-basic">{{hottoday}}</view>
+      <view class="wa-grid-50 border-basic">{{totalcount}}</view> -->
     </view>
   </view>
 
@@ -44,32 +44,34 @@
     <swiper current="{{currentTab}}" class="swiper" duration="300" style="height:{{winHeight-100}}px" bindchange="bindChange">  
         <!-- A股 -->  
         <swiper-item>  
-          <view wx:for="{{array1}}" wx:for-index="idx" wx:for-item="itemName">
+          <navigator wx:for="{{topCN}}" wx:for-index="idx" wx:for-item="item" url="../summary/summary?id={{ item.tickerId }}">
             <view class="wa-row">
-              <view style="font-size: 30rpx" class="wa-col-65 border-basic">No.{{idx+1}} {{itemName.stockname}}</view>
-              <view style="font-size: 30rpx" class="wa-col-35 border-basic">{{itemName.score}} 　>{{itemName.percentage}}%</view>
+              <view style="font-size: 34rpx" class="wa-col-65 border-basic">No.{{idx+1}} {{item.name}}</view>
+              <view style="font-size: 34rpx" class="wa-col-35 border-basic">{{item.score}} 　>99%</view>
             </view>
-          </view>
+          </navigator>
           <view>
-            今日市场综合评价: {{marketsummaryA}}
+            今日市场综合评价: {{dailySummary.marketsummaryA}}
+            <!-- 今日市场综合评价: {{dailySummary1}} -->
+
           </view>
         </swiper-item>  
+
         <!-- 美股 -->  
         <swiper-item>  
-          <view wx:for="{{array2}}" wx:for-index="idx" wx:for-item="itemName">
+          <navigator wx:for="{{topUS}}" wx:for-index="idx" wx:for-item="item" url="../summary/summary?id={{ item.tickerId }}" >
             <view class="wa-row">
-              <view style="font-size: 30rpx" class="wa-col-65 border-basic">No.{{idx+1}} {{itemName.stockname}}</view>
-              <view style="font-size: 30rpx" class="wa-col-35 border-basic">{{itemName.score}} 　>{{itemName.percentage}}%</view>
+              <view style="font-size: 34rpx" class="wa-col-65 border-basic" >No.{{idx+1}} {{item.name}}</view>
+              <view style="font-size: 34rpx" class="wa-col-35 border-basic" >{{item.score}} 　>99%</view>
             </view>
-          </view>
+          </navigator>
           <view style = "font-weight: 1000">
-            今日市场综合评价: {{marketsummaryM}}
+            今日市场综合评价: {{dailySummary.marketsummaryM}}
+            <!-- 今日市场综合评价: {{dailySummary2}} -->
+
           </view>   
         </swiper-item>  
     </swiper> 
   
-
-
-
 
 </view>

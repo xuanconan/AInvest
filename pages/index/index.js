@@ -2,12 +2,29 @@
 //获取应用实例
 const app = getApp()
 
+/**
+ * WeChat API 模块
+ * @type {Object}
+ * 用于将微信官方`API`封装为`Promise`方式
+ * > 小程序支持以`CommonJS`规范组织代码结构
+ */
+const wechat = require('../../utils/wechat.js')
+
+
+/**
+ * Baidu API 模块
+ * @type {Object}
+ */
+const baidu = require('../../utils/baidu.js')
+
 Page({
   data: {
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),     
+    currentCity: '',
+    hasCityInfo: false
   },
   //事件处理函数
   bindViewTap: function() {
@@ -16,6 +33,25 @@ Page({
     })
   },
   onLoad: function () {
+    console.log(this.data.currentCity)
+    var that = this;
+
+    // 获取用户城市信息
+    wechat
+      .getLocation()
+      .then(res => {
+        const { latitude, longitude } = res
+        return baidu.getCityName(latitude, longitude)
+      })
+      .then(name => {
+        this.data.currentCity = name.replace('市', '')
+        console.log(`currentCity : ${this.data.currentCity}`)
+      })
+      .catch(err => {
+        this.data.currentCity = '北京'
+        console.error(err)
+      })
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -42,6 +78,7 @@ Page({
         }
       })
     }
+
   },
   getUserInfo: function(e) {
     console.log(e)
@@ -50,5 +87,25 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  }
+  },
+
+  onReady: function () {
+    // 获取用户城市信息
+    wechat
+      .getLocation()
+      .then(res => {
+        const { latitude, longitude } = res
+        return baidu.getCityName(latitude, longitude)
+      })
+      .then(name => {
+        this.data.currentCity = name.replace('市', '')
+        console.log(`currentCityOnReady : ${this.data.currentCity}`)
+      })
+      .catch(err => {
+        this.data.currentCity = '北京'
+        console.error(err)
+      })
+  },
+
+
 })

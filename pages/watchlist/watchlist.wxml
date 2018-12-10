@@ -24,35 +24,41 @@
     </view>
   </view>
 </view>
-
-  <view  wx:for="{{stocks}}" wx:for-index="idx" wx:for-item="itemName">
+          <!-- <navigator wx:for="{{usTop}}" wx:for-index="idx" wx:for-item="item" url="../summary/summary?id={{ item.tickerId }}" >
+            <view class="wa-row">
+              <view style="font-size: 34rpx" class="wa-col-65 border-basic" >No.{{idx+1}} {{item.stockname}}</view>
+              <view style="font-size: 34rpx" class="wa-col-35 border-basic" >{{item.score}} 　>{{item.percentage}}%</view>
+            </view>
+          </navigator> -->
+          
+  <navigator  wx:for="{{stocks}}" wx:for-index="idx" wx:for-item="item" url="../summary/summary?id={{ item.tickerId }}">
     <view class="wa-row">
 
-      <view class="wa-grid-16b border-basic">{{itemName.symbol}}</view>
+      <view class="wa-grid-16b border-basic">{{item.symbol}}</view>
       <view class="wa-grid-16b border-basic">
-        <view wx:if="{{itemName.percentage < 0}}">
-          <view style = "color:#008000">{{itemName.percentage}}%</view>
+        <view wx:if="{{item.percentage < 0}}">
+          <view style = "color:#008000">{{item.percentage}}%</view>
         </view>
-        <view wx:elif="{{itemName.percentage > 0}}"> 
-          <view style = "color:#FF0000">{{itemName.percentage}}%</view>
+        <view wx:elif="{{item.percentage > 0}}"> 
+          <view style = "color:#FF0000">{{item.percentage}}%</view>
         </view>
       </view>
       <view class="wa-grid-16b border-basic">
-        <view wx:if="{{itemName.percentage < 0}}">
-          <view style = "color:#008000">{{itemName.price}}</view>
+        <view wx:if="{{item.percentage < 0}}">
+          <view style = "color:#008000">{{item.price}}</view>
         </view>
-        <view wx:elif="{{itemName.percentage > 0}}"> 
-          <view style = "color:#FF0000">{{itemName.price}}</view>
+        <view wx:elif="{{item.percentage > 0}}"> 
+          <view style = "color:#FF0000">{{item.price}}</view>
         </view>
       
       </view>
 
 
 
-      <view class="wa-grid-16b border-basic ">{{itemName.score}}/100</view>
-      <view class="wa-grid-16b border-basic ">{{itemName.percentile}}</view>
-      <view class="wa-grid-16b border-basic ">{{itemName.recommend}}</view>
+      <view class="wa-grid-16b border-basic ">{{item.score}}/100</view>
+      <view class="wa-grid-16b border-basic ">{{item.percentile}}</view>
+      <view class="wa-grid-16b border-basic ">{{item.recommend}}</view>
     </view>
-  </view>
+  </navigator>
 
 

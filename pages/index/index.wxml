@@ -15,4 +15,7 @@
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>
+  <view>
+      <text>我的城市: {{currentCity}}</text>
+  </view>
 </view>

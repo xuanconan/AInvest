@@ -34,12 +34,22 @@
   <view class="wa-grid-3">
     <text>击败同行业{{stock.percentile}}的股票</text>
   </view>
+
   <view class="wa-grid-3">
     <text>{{stock.recommend}}: {{stock.summary}}</text>
   </view>
 </view>
 
 <view class="divLine"></view>
+
+  <view class="wa-grid-3">
+    <text>当前股票\n</text>
+
+    <text>{{currentStock}}</text>
+  </view>
+
+<view class="divLine"></view>
+
 
 
 
@@ -69,7 +79,7 @@
 <view class="padding"></view>
 
   <view class="line-container">
-      <canvas canvas-id="prices" disable-scroll="true" class="canvas" bindtouchstart="touchHandler"></canvas>
+      <canvas canvas-id="prices" disable-scroll="true" class="canvas" bindtouchstart="touchHandler1"></canvas>
   </view>
 
   <view class="wa-grid-4">
@@ -77,21 +87,26 @@
   </view>
 
   <view class="wa-row">
-    <view style="font-size: 24rpx" class="wa-col-25 border-basic">　买/卖</view>
-    <view style="font-size: 24rpx" class="wa-col-25 border-basic">日期</view>
-    <view style="font-size: 24rpx" class="wa-col-25 border-basic">当日评分</view>
-    <view style="font-size: 24rpx" class="wa-col-25 border-basic">价格</view>
+    <view style="font-size: 24rpx" class="wa-col-20 border-basic">　多/空</view>
+    <view style="font-size: 24rpx" class="wa-col-20 border-basic">日期</view>
+    <view style="font-size: 24rpx" class="wa-col-20 border-basic">当日评分</view>
+    <view style="font-size: 24rpx" class="wa-col-20 border-basic">价格</view>
+    <view style="font-size: 24rpx" class="wa-col-20 border-basic">投资回报</view>
   </view>
   <view class="divLine"></view>
 
   <view wx:for="{{buysell}}" wx:for-index="idx" wx:for-item="itemName">
     <view class="wa-row">
-      <view style="font-size: 24rpx" class="wa-col-25 border-basic">　{{itemName.sellorbuy}}</view>
-      <view style="font-size: 24rpx" class="wa-col-25 border-basic">{{itemName.date}}</view>
-      <view style="font-size: 24rpx" class="wa-col-25 border-basic">{{itemName.score}}</view>
-      <view style="font-size: 24rpx" class="wa-col-25 border-basic">{{itemName.price}}</view>
-
+      <view style="font-size: 24rpx" class="wa-col-20 border-basic">　{{itemName.sellorbuy}}</view>
+      <view style="font-size: 24rpx" class="wa-col-20 border-basic">{{itemName.date}}</view>
+      <view style="font-size: 24rpx" class="wa-col-20 border-basic">{{itemName.score}}</view>
+      <view style="font-size: 24rpx" class="wa-col-20 border-basic">{{itemName.price}}</view>
+      <view style="font-size: 24rpx" class="wa-col-20 border-basic">{{itemName.r5}}</view>
     </view>
+  </view>
+
+  <view class="wa-grid-8">
+    <text>*持有五个交易日</text>
   </view>
 
 <view class="divLine"></view>
@@ -164,7 +179,7 @@
 
 
 <view class="container2">
-    <canvas canvas-id="longshort" class="canvas" style="height:300px" bindtouchstart="touchHandler"></canvas>
+    <canvas canvas-id="longshort" class="canvas" style="height:300px" bindtouchstart="touchHandler1"></canvas>
 </view>
 
 <view class="divLine"></view>
@@ -196,7 +211,7 @@
   </view> -->
 
   <view class="line-container">
-      <canvas canvas-id="costs" disable-scroll="true" class="canvas" bindtouchstart="touchHandler"></canvas>
+      <canvas canvas-id="costs" disable-scroll="true" class="canvas" bindtouchstart="touchHandler2"></canvas>
   </view>
 
 

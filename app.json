@@ -25,13 +25,6 @@
       },
 
       {
-        "pagePath": "pages/summary/summary",
-        "text": "AI诊股",
-        "iconPath": "images/K线图灰.png",
-        "selectedIconPath": "images/K线图红.png"
-      },
-
-      {
         "pagePath": "pages/watchlist/watchlist",
         "text": "自选",
         "iconPath": "images/收藏夹灰.png",
