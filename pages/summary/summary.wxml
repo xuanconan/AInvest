@@ -32,23 +32,23 @@
   </view>
 
   <view class="wa-grid-3">
-    <text>击败同行业{{stock.percentile}}的股票</text>
+    <text>击败同行业{{stock.percentail}}%的股票</text>
   </view>
 
   <view class="wa-grid-3">
-    <text>{{stock.recommend}}: {{stock.summary}}</text>
+    <text>{{stock.recommend}}</text>
   </view>
 </view>
 
 <view class="divLine"></view>
 
-  <view class="wa-grid-3">
+  <!-- <view class="wa-grid-3">
     <text>当前股票\n</text>
 
-    <text>{{currentStock}}</text>
-  </view>
+    <text>{{currentStock.ticker}}</text>
+  </view> -->
 
-<view class="divLine"></view>
+<!-- <view class="divLine"></view> -->
 
 
 
@@ -56,17 +56,17 @@
 <view>
   <view class="wa-row">
     <div style="font-size: 28rpx" class="wa-col-25 border-basic">技术面</div>
-    <view style="font-size: 26rpx"class="wa-col-75 border-basic">{{stock.tech}}</view>
+    <view style="font-size: 26rpx"class="wa-col-75 border-basic">{{stock.summary1}}</view>
   </view>
   <view class="divLine2"></view>
   <view class="wa-row">
     <view style="font-size: 28rpx" class="wa-col-25 border-basic">基础面</view>
-    <view style="font-size: 26rpx" class="wa-col-75 border-basic">{{stock.fundamental}}</view>
+    <view style="font-size: 26rpx" class="wa-col-75 border-basic">{{stock.summary2}}</view>
   </view>
   <view class="divLine2"></view>
   <view class="wa-row">
     <view style="font-size: 28rpx" class="wa-col-25 border-basic">资金面</view>
-    <view style="font-size: 26rpx" class="wa-col-75 border-basic">{{stock.finance}}</view>
+    <view style="font-size: 26rpx" class="wa-col-75 border-basic">{{stock.summary3}}</view>
   </view>
 </view>
 
@@ -122,10 +122,10 @@
   </view>
 
   <view class="wa-grid-3">
-    <text>{{basic.summary1}}</text>
+    <text>{{basic.reasons[0]}}</text>
   </view>
   <view class="wa-grid-3">
-    <text>{{basic.summary2}}</text>
+    <text>{{basic.reasons[1]}}</text>
   </view>
     <view class="wa-grid-3">
     <text>{{basic.summary3}}</text>
@@ -159,15 +159,15 @@
   </view>
 
   <view class="wa-grid-7">
-    <text>资金面AI评分 {{finance.score}}/100</text>
+    <text>资金面AI评分 {{finance.score}}</text>
   </view>
 
   <view class="wa-grid-3">
-    <text>{{finance.summary1}}</text>
+    <text>{{finance.reasons[0]}}</text>
   </view>
-  <view class="wa-grid-3">
+  <!-- <view class="wa-grid-3">
     <text>{{finance.summary2}}</text>
-  </view>
+  </view> -->
   <!-- <view class="wa-grid-3">
     <text>{{finance.summary3}}</text>
   </view> -->
@@ -191,18 +191,18 @@
   </view>
 
   <view class="wa-grid-7">
-    <text>技术面AI评分 {{tech.score}}/100</text>
+    <text>技术面AI评分 {{tech.score}}</text>
   </view>
 
   <view class="wa-grid-3">
-    <text>{{tech.summary1}}</text>
+    <text>{{tech.reasons[0]}}</text>
   </view>
-  <view class="wa-grid-3">
+  <!-- <view class="wa-grid-3">
     <text>{{tech.summary2}}</text>
   </view>
-   <view class="wa-grid-3">
+  <view class="wa-grid-3">
     <text>{{tech.summary3}}</text>
-  </view> 
+  </view>  -->
 </view>
 
 <view class="divLine"></view>

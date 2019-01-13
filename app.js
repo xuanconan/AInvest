@@ -1,3 +1,6 @@
+var Api = require('./api/api.js');
+var util = require('./utils/util.js')
+var StaticStrings = require('./utils/StaticStrings.js')
 /**
  * WeChat API 模块
  * @type {Object}
@@ -25,7 +28,7 @@ App({
     userInfo: null,
     currentCity: '北京',
     sinaDomain: 'http://hq.sinajs.cn/list=',
-    appDomain:'http://47.94.195.63/'
+    appDomain:'https://ainvestcn.com/'
   },
 
   /**

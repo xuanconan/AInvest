@@ -1,32 +1,37 @@
-// pages/search/search.
+var Api = require('../../api/api.js');
+// var Api = require('../../utils/util.js');
+
 
 var SearchBar = require('../common/SearchBar/SearchBar.js')
-Page({
 
-  /**
-   * 页面的初始数据
-   */
+// var optionalUtil = require('../../utils/optionalUtil.js')
+// var optionalUtil = require('../../utils/util.js')
+
+var Util = require('../../utils/util.js')
+
+let viewmodel = require('viewmodel.js')
+
+Page({
   data: {
     stockArray: [],
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady: function () {
     var that = this
     SearchBar.init("代码/名称/简拼", that)
 
     that.setData({
-      // stockArray: viewmodel.getDefaultData()
+      stockArray: viewmodel.getDefaultData()
     })
+  },
+
+  onShareAppMessage: function () {
+    return {
+      title: '搜索',
+      desc: `${getApp().globalData.shareDesc}`,
+      // path: `/pages/search/search`
+      path: `/pages/kanpan/kanpan?page=search`
+    }
   },
 
   onSearchBarClearEvent: function (e) {
@@ -36,7 +41,7 @@ Page({
     that.data.stockArray = []
     that.setData(that.data)
     that.setData({
-      // stockArray: viewmodel.getDefaultData()
+      stockArray: viewmodel.getDefaultData()
     })
   },
 
@@ -60,50 +65,42 @@ Page({
       that.data.stockArray = []
       that.setData(that.data)
       that.setData({
-        // stockArray: viewmodel.getDefaultData()
+        stockArray: viewmodel.getDefaultData()
       })
     }
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  onAddOrDelStock: function (e) {
+    console.log("onAddOrDelStock", e)
+    var that = this
+
+    var stocks = that.data.stockArray
+
+    that.data.stockArray = []
+    that.setData(that.data)
+
+    var stock = stocks[e.currentTarget.id]
+    stock.setOptional(!stock.optional)
+
+    that.data.stockArray = stocks
+
+    that.setData(that.data)
+
+    Api.stock.commitOptionals({
+      goodsId: stock.goodsId
+    }).then(function (res) {
+      console.log("添加自选股", res)
+    }, function (res) {
+      console.log("添加自选股", res)
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
+  onShowStockDetail: function (e) {
+    console.log("onShowStockDetail", e)
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+    if (e.detail.x < 315) {
+      var stock = e.currentTarget.dataset.stock
+      Util.gotoQuote(stock.goodsId, stock.name, stock.code)
+    }
   }
 })

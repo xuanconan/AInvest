@@ -5,7 +5,8 @@
     "pages/summary/summary",
     "pages/tech/tech",
     "pages/watchlist/watchlist",
-    "pages/index/index"
+    "pages/index/index",
+    "pages/search_backup/search_backup"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -23,7 +24,6 @@
         "iconPath": "images/股票灰.png",
         "selectedIconPath": "images/股票红.png"
       },
-
       {
         "pagePath": "pages/watchlist/watchlist",
         "text": "自选",

@@ -44,7 +44,7 @@
     <swiper current="{{currentTab}}" class="swiper" duration="300" style="height:{{winHeight-100}}px" bindchange="bindChange">  
         <!-- A股 -->  
         <swiper-item>  
-          <navigator wx:for="{{topCN}}" wx:for-index="idx" wx:for-item="item" url="../summary/summary?id={{ item.tickerId }}">
+          <navigator wx:for="{{topCN}}" wx:for-index="idx" wx:for-item="item" url="../summary/summary?id={{ item.ticker }}">
             <view class="wa-row">
               <view style="font-size: 34rpx" class="wa-col-65 border-basic">No.{{idx+1}} {{item.name}}</view>
               <view style="font-size: 34rpx" class="wa-col-35 border-basic">{{item.score}} 　>99%</view>
@@ -59,7 +59,7 @@
 
         <!-- 美股 -->  
         <swiper-item>  
-          <navigator wx:for="{{topUS}}" wx:for-index="idx" wx:for-item="item" url="../summary/summary?id={{ item.tickerId }}" >
+          <navigator wx:for="{{topUS}}" wx:for-index="idx" wx:for-item="item" url="../summary/summary?id={{ item.ticker }}" >
             <view class="wa-row">
               <view style="font-size: 34rpx" class="wa-col-65 border-basic" >No.{{idx+1}} {{item.name}}</view>
               <view style="font-size: 34rpx" class="wa-col-35 border-basic" >{{item.score}} 　>99%</view>

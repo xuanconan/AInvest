@@ -5,6 +5,8 @@ var app = getApp();
 var radarChart = null;
 var lineChart1 = null;
 var lineChart2 = null;
+var columnChart1 = null;
+var columnChart2 = null;
 var columnChart = null;
 var pieChart = null;
 // var theName = '累计大单净量(万手)';
@@ -32,16 +34,16 @@ Page({
     },
 
     basic: {
-      symbol: 'AAPL',
-      score: '73',
-      percentage: '1.8',
-      price: '190.24',
-      industry: '消费品',
-      recommend: '持有',
-      percentile: '66.14%',
-      summary1: '毛利润同比增长13.7%，盈利增加',
-      summary2: '营业收入同比增长15.6，产品销售增加',
-      summary3: '存货是行业均值的56%，存货较少，产品销售较好',
+      // symbol: 'AAPL',
+      // score: '73',
+      // percentage: '1.8',
+      // price: '190.24',
+      // industry: '消费品',
+      // recommend: '持有',
+      // percentile: '66.14%',
+      // summary1: '毛利润同比增长13.7%，盈利增加',
+      // summary2: '营业收入同比增长15.6，产品销售增加',
+      // summary3: '存货是行业均值的56%，存货较少，产品销售较好',
     },
     finance: {
       symbol: 'AAPL',
@@ -171,13 +173,14 @@ Page({
   //   });
   // },
 
+
+
   onLoad: function (e) {
     var that = this;
 
     wx.showLoading({ title: '拼命加载中...' })
-    console.log(sinaDomain + e.id)
+    // console.log(appDomain + e.id)
 
-    
     var windowWidth = 320;
     try {
       var res = wx.getSystemInfoSync();
@@ -186,16 +189,84 @@ Page({
       console.error('getSystemInfoSync failed!');
     }
 
-    //获取新浪股票信息 上海
+    //获取今日总评文字信息
     wx.request({
-      url: 'http://47.94.195.63/mf1volume/mf?ticker=SH600019',
+      url: appDomain + 'overview/basic?ticker=' + e.id ,
       header: {
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
+        console.log('in callback 今日总评文字')
         console.log(res.data)
         that.setData({
-          currentStock: res.data
+          stock: res.data
+        })
+      }
+    })
+
+   //获取今日总评打分信息
+    wx.request({
+      url: appDomain + 'overview/data?ticker=' + e.id,
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log('in callback 今日总评打分')
+        console.log(res.data.series)
+        lineChart1.updateData({
+          categories: res.data.categories,
+          series: res.data.series
+        })
+      }
+    });
+
+    //获取资金面打分信息
+    wx.request({
+      url: appDomain + 'mf1volume/mf?ticker=' + e.id,
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log('in callback 资金面打分')
+
+        // lineChart2.updateData({
+        //   categories: res.data.categories,
+        //   series: res.data.series
+        // })
+
+        console.log(res.data)
+
+        that.setData({
+          finance: res.data
+        })
+
+        // columnChart.updateData({
+
+        // })
+      }
+    });
+
+
+    //获取技术面打分信息
+    wx.request({
+      url: appDomain + 'mf1volume/techmf?ticker=' + e.id,
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log('in callback 技术面打分')
+        console.log(res.data.series)
+
+
+        lineChart2.updateData({
+          categories: res.data.categories,
+          series: res.data.series
+        })
+
+        console.log(res.data)
+
+        that.setData({
+          tech: res.data
         })
       }
     });
@@ -238,6 +309,84 @@ Page({
         lineStyle: 'curve'
       }
     });
+
+
+    //获取基本面分析文字信息
+    wx.request({
+      url: appDomain + 'mf1volume/fundts?ticker=' + e.id,
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log('in callback 基本面')
+        console.log(res.data)
+
+        console.log('in callback series1')
+        console.log(res.data.series1)
+
+        that.setData({
+          basic: res.data
+        })
+        columnChart1.updateData({
+          categories: res.data.categories,
+          series: res.data.series1
+        })
+        columnChart2.updateData({
+          categories: res.data.categories,
+          series: res.data.series2
+        })
+      }
+    });
+
+    columnChart1 = new wxCharts({
+      canvasId: 'profit',
+      type: 'column',
+      animation: true,
+      // categories: [],
+      // series: [{
+        
+      // }, {
+        
+      // }],
+
+      categories: ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017','2018'],
+      series: [{
+        name: 'AAPL',
+        data: [14010, 25920, 41730, 37040, 39510, 53394, 45687, 48351, 52000]
+      }, {
+        name: '行业平均',
+        data: [8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000, 16000]
+      }],
+
+      yAxis: {
+        format: function (val) {
+          return val + '百万';
+        }
+      },
+      width: wx.getSystemInfoSync().windowWidth,
+      height: 200
+    });
+
+    columnChart2 = new wxCharts({
+      canvasId: 'roe',
+      type: 'column',
+      animation: true,
+      categories: ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017'],
+      series: [{
+        name: 'AAPL',
+        data: [29.23, 33.83, 35.30, 29.98, 35.42, 44.74, 35.62, 36.07]
+      }, {
+        name: '行业平均',
+        data: [8, 10, 8, 9, 12, 10, 11, 12]
+      }],
+      yAxis: {
+        format: function (val) {
+          return val + '%';
+        }
+      },
+      width: wx.getSystemInfoSync().windowWidth,
+      height: 200
+    });
   },
 
   onReady: function (e) {
@@ -266,48 +415,6 @@ Page({
     //     }
     //   }
     // });
-
-    columnChart = new wxCharts({
-      canvasId: 'profit',
-      type: 'column',
-      animation: true,
-      categories: ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017'],
-      series: [{
-        name: 'AAPL',
-        data: [14010, 25920, 41730, 37040, 39510, 53394, 45687, 48351]
-      }, {
-        name: '行业平均',
-        data: [8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000]
-      }],
-      yAxis: {
-        format: function (val) {
-          return val + '百万';
-        }
-      },
-      width: wx.getSystemInfoSync().windowWidth,
-      height: 200
-    });
-
-    columnChart = new wxCharts({
-      canvasId: 'roe',
-      type: 'column',
-      animation: true,
-      categories: ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017'],
-      series: [{
-        name: 'AAPL',
-        data: [29.23, 33.83, 35.30, 29.98, 35.42, 44.74, 35.62, 36.07]
-      }, {
-        name: '行业平均',
-        data: [8, 10, 8, 9, 12, 10, 11, 12]
-      }],
-      yAxis: {
-        format: function (val) {
-          return val + '%';
-        }
-      },
-      width: wx.getSystemInfoSync().windowWidth,
-      height: 200
-    });
 
 
     columnChart = new wxCharts({
